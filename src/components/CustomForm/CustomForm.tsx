@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod/src/index.js';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { registerSchema, RegisterForm } from '../../schemas/';
+import { registerSchema, RegisterForm } from '../schemas';
 import InputForm from '../CustomInput/InputForm';
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
