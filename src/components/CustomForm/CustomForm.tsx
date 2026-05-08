@@ -3,13 +3,15 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { registerSchema, RegisterForm } from '../../schemas/';
 import InputForm from '../CustomInput/InputForm';
 import { useState } from 'react';
-import { set } from 'zod';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import styles from './CustomForm.module.css';
 
 const CustomForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const togglePasswordVisibility = () => {
-    setShowPassword((showPassword) => !showPassword);
-  }
+    setShowPassword((prev) => !prev);
+  };
 
   const {
     control,
@@ -24,8 +26,18 @@ const CustomForm = () => {
     console.log(data);
   };
 
+  const passwordToggleButton = (
+    <button
+      type="button"
+      onClick={togglePasswordVisibility}
+      className={styles.toggleButton}
+    >
+      {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+    </button>
+  );
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <InputForm<RegisterForm>
         name="name"
         control={control}
@@ -46,6 +58,7 @@ const CustomForm = () => {
         label="Contraseña"
         type={showPassword ? 'text' : 'password'}
         error={errors.password}
+        endAdornment={passwordToggleButton}
       />
       <InputForm<RegisterForm>
         name="confirmPassword"
@@ -53,9 +66,12 @@ const CustomForm = () => {
         label="Confirmar Contraseña"
         type={showPassword ? 'text' : 'password'}
         error={errors.confirmPassword}
+        endAdornment={passwordToggleButton}
       />
 
-      <button type="submit">Registrarse</button>
+      <button type="submit" className={styles.submitButton}>
+        Registrarse
+      </button>
     </form>
   );
 };

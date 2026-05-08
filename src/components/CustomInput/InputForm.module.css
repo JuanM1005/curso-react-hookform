@@ -1,0 +1,17 @@
+.fieldWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fieldWrapper input {
+  width: 100%;
+  padding-right: 36px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}

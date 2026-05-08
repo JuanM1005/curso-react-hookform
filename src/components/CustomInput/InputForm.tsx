@@ -1,4 +1,12 @@
-import { Control, Controller, FieldError, FieldValues, Path } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  FieldError,
+  FieldValues,
+  Path,
+} from 'react-hook-form';
+import React from 'react';
+import styles from './InputForm.module.css';
 
 interface CustomInputProps<T extends FieldValues> {
   name: Path<T>;
@@ -6,23 +14,31 @@ interface CustomInputProps<T extends FieldValues> {
   label: string;
   type?: string;
   error?: FieldError;
+  endAdornment?: React.ReactNode;
 }
 
 const InputForm = <T extends FieldValues>({
-name,
+  name,
   control,
   label,
   type = 'text',
   error,
+  endAdornment,
 }: CustomInputProps<T>) => {
   return (
-    <Controller name={name}
+    <Controller
+      name={name}
       control={control}
       render={({ field }) => (
         <>
           <label htmlFor={name}>{label}</label>
-          <input id={name} {...field} type={type} placeholder={label} />
-          {error && <span>{error.message}</span>}
+          <div className={styles.fieldWrapper}>
+            <input id={name} {...field} type={type} placeholder={label} />
+            {endAdornment}
+          </div>
+          {error && (
+            <span className={styles.errorMessage}>{error.message}</span>
+          )}
         </>
       )}
     />
